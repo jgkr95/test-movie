@@ -1,22 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 
 const SignUp = () => {
-  const handleSubmit = (data) => {
-    console.log(data, "data");
+  const [name, setName] = useState(null);
+  const [email, setEmail] = useState(null);
+
+  const handleSubmit = () => {
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
   };
+
+  console.log(name, "name");
+  console.log(email, "email");
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <h3>Sign Up</h3>
 
       <div className="form-group">
         <label>Name</label>
-        <input type="text" className="form-control" placeholder="First name" />
+        <input
+          type="text"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+          name="name"
+          className="form-control"
+          placeholder="Name"
+        />
       </div>
 
       <div className="form-group">
         <label>Email address</label>
         <input
           type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
           className="form-control"
           placeholder="Enter email"
         />
@@ -49,7 +66,7 @@ const SignUp = () => {
         </select>
       </div>
 
-      <button type="submit" className="btn btn-primary btn-block">
+      <button onClick={handleSubmit} className="btn btn-primary btn-block">
         Sign Up
       </button>
     </form>
